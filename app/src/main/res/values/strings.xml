@@ -1,0 +1,38 @@
+<resources>
+    <string name="app_name">DecisionDice</string>
+
+    <string name="pick_category">Pick a category</string>
+    <string name="category1">Dinner</string>
+    <string name="category2">Drinks</string>
+    <string name="category3">Music</string>
+
+    <string name="explanation">Rolling the dice will result in a choice of one of the options you check.</string>
+    <string name="finished">Finished</string>
+    <string name="roll_dice1">Okay, now put your phone in the dice, and</string>
+    <string name="roll_dice2">roll the dice!</string>
+
+    <string name="dinner_options">Pick dinner options (max. 6)</string>
+    <string name="dinner1">Chinese</string>
+    <string name="dinner2">Sushi</string>
+    <string name="dinner3">Pizza</string>
+    <string name="dinner4">Indian</string>
+    <string name="dinner5">Soup</string>
+    <string name="dinner6">Pancakes</string>
+
+    <string name="drinks_options">Pick drinks options (max. 6)</string>
+    <string name="drinks1">Water</string>
+    <string name="drinks2">Tea</string>
+    <string name="drinks3">Coffee</string>
+    <string name="drinks4">Hot chocolate</string>
+    <string name="drinks5">Beer</string>
+    <string name="drinks6">Wine</string>
+
+    <string name="music_options">Pick music options (max. 6)</string>
+    <string name="music1">Rock</string>
+    <string name="music2">Jazz</string>
+    <string name="music3">Classical</string>
+    <string name="music4">Pop</string>
+    <string name="music5">Indie</string>
+    <string name="music6">Blues</string>
+
+</resources>
