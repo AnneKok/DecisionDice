@@ -2,6 +2,10 @@
     <string name="app_name">DecisionDice</string>
 
     <string name="decision">The dice decided on...</string>
+    <string name="confirm">Yes! Make it happen!</string>
+    <string name="deny">Oh no! Try again...</string>
+    <string name="confirmed_pizza">Your pizza has been ordered!</string>
+    <string name="update">We will notify you on Twitter with more information.</string>
 
     <string name="pick_category">Pick a category</string>
     <string name="category1">Dinner</string>

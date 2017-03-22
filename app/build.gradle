@@ -36,7 +36,7 @@ android {
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile fileTree(include: ['*.jar'], dir: 'libs')
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
@@ -48,4 +48,7 @@ dependencies {
     compile 'com.mcxiaoke.volley:library-aar:1.0.0'
     compile 'com.android.support:design:25.3.0'
     testCompile 'junit:junit:4.12'
+    compile files('libs/oocsi.jar')
+    compile files('libs/twitter4j.jar')
+    compile files('libs/twitter4jstream.jar')
 }
