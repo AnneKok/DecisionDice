@@ -34,5 +34,12 @@
     <string name="music4">Pop</string>
     <string name="music5">Indie</string>
     <string name="music6">Blues</string>
+    <string name="title_activity_login">LoginActivity</string>
+
+    <string name="logo">DecisionDice logo</string>
+    <string name="please_sign_in">Please sign in to Twitter before getting started.</string>
+    <string name="welcome">Welcome!</string>
+
+    <string name="action_settings">Settings</string>
 
 </resources>

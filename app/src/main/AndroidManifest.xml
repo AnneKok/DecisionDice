@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.decisiondice">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -41,6 +43,11 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".CategoryPicker" />
         </activity>
+
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="6c6fd3e689435a7b2765f151c0d33a36a6a6d1a8" />
+
     </application>
 
 </manifest>
