@@ -30,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
     private static final String TWITTER_KEY = "CdgOhLWmfD6gO4MqwAsQYpvHu";
     private static final String TWITTER_SECRET = "LueXAWdgCWluDHq2I5hGlMOw4RwPpx0fsD8RehXuqtMxmyx3Ii";
     private TwitterLoginButton loginButton;
+    private String twitterID = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,16 +39,19 @@ public class MainActivity extends AppCompatActivity {
         Fabric.with(this, new Twitter(authConfig));
         setContentView(R.layout.activity_main);
 
+        // Disable Pick a category button by default
+        Button categoryButton = (Button) findViewById(R.id.pickCategoryButton);
+        categoryButton.setEnabled(false);
+
         loginButton = (TwitterLoginButton) findViewById(R.id.twitter_login_button);
         loginButton.setCallback(new Callback<TwitterSession>() {
             @Override
             public void success(Result<TwitterSession> result) {
-                // The TwitterSession is also available through:
-                // Twitter.getInstance().core.getSessionManager().getActiveSession()
                 TwitterSession session = result.data;
-                // TODO: Remove toast and use the TwitterSession's userID
-                // with your app's user model
+
                 String msg = "@" + session.getUserName() + " logged in! (#" + session.getUserId() + ")";
+                twitterID = session.getUserName();
+                TwitterIDHolder.getInstance().setID(twitterID);
                 Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_LONG).show();
             }
             @Override
@@ -70,6 +74,7 @@ public class MainActivity extends AppCompatActivity {
     public void toPickCategory(View view) {
         Intent intent = new Intent(this, CategoryPicker.class);
         startActivity(intent);
+        intent.putExtra("twitterID", twitterID);
     }
 
 }

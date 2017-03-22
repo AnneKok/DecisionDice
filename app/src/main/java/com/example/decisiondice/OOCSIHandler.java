@@ -37,7 +37,6 @@ public class OOCSIHandler extends Tweeter {
         }
         System.out.println("[OOCSIHandler] Received a Tweet to be sent!");
         postStatus(OOCSItweet);
-
     }
 
 }

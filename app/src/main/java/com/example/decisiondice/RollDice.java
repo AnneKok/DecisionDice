@@ -8,7 +8,7 @@ import android.os.Bundle;
 public class RollDice extends AppCompatActivity {
 
     // After this time-out, the decision will be shown to the user
-    // This should in the future be done with the Gestures detection rather than a timeout
+    // TODO: use Gestures detection rather than a timeout
     private static int TIME_OUT = 4000;
 
     @Override

@@ -15,18 +15,20 @@ import nl.tue.id.oocsi.client.socket.*;
 public class PizzaConfirmActivity extends AppCompatActivity {
 
     OOCSIClient sender;
+    String twitterID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pizza_confirm);
 
+        twitterID = TwitterIDHolder.getInstance().getID();
+
         // Order a pizza
         OOCSIClient sender = new OOCSIClient("group4");
-        new OOCSIMessage(sender, "choosePizza").data("user", 4).send();
+        new OOCSIMessage(sender, "choosePizza").data("user", twitterID).send();
 
-
+        // TODO: confirm order using confirmOrder method in Tweeter class
     }
-
 
 }

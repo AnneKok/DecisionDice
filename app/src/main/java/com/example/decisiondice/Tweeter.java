@@ -41,13 +41,11 @@ public class Tweeter {
     TwitterStream twitterStream;
 
     StatusHandler statusHandler = new StatusHandler();
-    DeadlineHandler deadlineHandler = new DeadlineHandler();
     OOCSIHandler oocsiHandler = new OOCSIHandler();
 
     Query query;
     Status status;
     StatusListener listener;
-    List<Deadline> deadlines;
 
     int maxTweetLength = 140;
     SimpleDateFormat dateFormat = new SimpleDateFormat("MMMM dd, 'at' HH:mm");
@@ -57,7 +55,8 @@ public class Tweeter {
      * The listener can monitor streaming Twitter data. The OOCSI receiver
      * monitors incoming OOCSI messages on the tweetBot channel.
      */
-    public void setup() {
+    public Tweeter() {
+
         // Setup Twitter instance
         ConfigurationBuilder cb = new ConfigurationBuilder();
         cb.setDebugEnabled(true)
@@ -78,10 +77,6 @@ public class Tweeter {
         // Setup OOCSI receiver
         OOCSI oocsi = new OOCSI(this, "TweetReceiver", "oocsi.id.tue.nl");
         oocsi.subscribe("tweetBot");
-
-        // Set deadlines
-        deadlines = new ArrayList<Deadline>();
-        deadlineHandler.setDeadlines();
 
     }
 
@@ -145,5 +140,20 @@ public class Tweeter {
                 e.printStackTrace();
             }
         }
+    }
+
+    /**
+     * Sends an order confirmation for a product to the Twitter
+     * user who placed the order.
+     *
+     * @param  product The product that was ordered.
+     * @param  username The Twitter user who ordered it.
+     *  ordered.
+     */
+    public void confirmOrder(String product, String username) {
+        String orderReply =
+                "@" + username +
+                        " Your " + product + " has been ordered!";
+        postStatus(orderReply);
     }
 }
