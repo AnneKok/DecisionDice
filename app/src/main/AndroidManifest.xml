@@ -48,6 +48,7 @@
             android:name="io.fabric.ApiKey"
             android:value="6c6fd3e689435a7b2765f151c0d33a36a6a6d1a8" />
 
+        <activity android:name=".PizzaActivity"></activity>
     </application>
 
 </manifest>
