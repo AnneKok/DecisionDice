@@ -1,6 +1,8 @@
 package com.example.decisiondice;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -40,8 +42,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         // Disable Pick a category button by default
-        Button categoryButton = (Button) findViewById(R.id.pickCategoryButton);
+        final Button categoryButton = (Button) findViewById(R.id.pickCategoryButton);
         categoryButton.setEnabled(false);
+        categoryButton.setVisibility(View.INVISIBLE);
 
         loginButton = (TwitterLoginButton) findViewById(R.id.twitter_login_button);
         loginButton.setCallback(new Callback<TwitterSession>() {
@@ -53,6 +56,10 @@ public class MainActivity extends AppCompatActivity {
                 twitterID = session.getUserName();
                 TwitterIDHolder.getInstance().setID(twitterID);
                 Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_LONG).show();
+
+                // Enable Pick a category button
+                categoryButton.setEnabled(true);
+                categoryButton.setVisibility(View.VISIBLE);
             }
             @Override
             public void failure(TwitterException exception) {
