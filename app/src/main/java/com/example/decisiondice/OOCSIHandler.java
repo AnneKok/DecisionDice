@@ -19,24 +19,35 @@ import nl.tue.id.oocsi.client.socket.*;
  * @author  Manon Blankendaal
  * @author  Anne Kok
  */
-public class OOCSIHandler extends Tweeter {
+public class OOCSIHandler {
 
     String OOCSItweet;
+    int maxTweetLength;
+    Tweeter tweeter;
+
+    public OOCSIHandler(int maxTweetLength, Tweeter tweeter) {
+        this.maxTweetLength = maxTweetLength;
+        this.tweeter = tweeter;
+        // TODO: asynctask to fix NetworkOnMainThreadException for OOCSI receiver
+        // OOCSI oocsi = new OOCSI(this, "TweetReceiver", "oocsi.id.tue.nl");
+        // oocsi.subscribe("tweetBot");
+    }
 
     /**
-     * Handles OOCSI events.
+     * Posts tweet sent through OOCSI.
      *
      * @param  event The OOCSI event to be handled. Should be
      *  at most {@code maxTweetLength} characters.
      */
-    public void handleOOCSI(OOCSIEvent event) {
-
+    public void tweetBot(OOCSIEvent event) {
         OOCSItweet = event.getString("tweet", "Default tweet. Something went wrong.");
         if (OOCSItweet.length() > maxTweetLength) {
             System.out.println("Error: The status is too long to be posted.");
         }
         System.out.println("[OOCSIHandler] Received a Tweet to be sent!");
-        postStatus(OOCSItweet);
+        tweeter.postStatus(OOCSItweet);
     }
+
+    // TODO: Add more OOCSI functionality?
 
 }

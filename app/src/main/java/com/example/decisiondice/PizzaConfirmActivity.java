@@ -12,7 +12,7 @@ import nl.tue.id.oocsi.client.protocol.*;
 import nl.tue.id.oocsi.client.services.*;
 import nl.tue.id.oocsi.client.socket.*;
 
-public class PizzaConfirmActivity extends AppCompatActivity {
+public class PizzaConfirmActivity extends Tweeter {
 
     OOCSIClient sender;
     String twitterID;
@@ -24,11 +24,14 @@ public class PizzaConfirmActivity extends AppCompatActivity {
 
         twitterID = TwitterIDHolder.getInstance().getID();
 
-        // Order a pizza
+        // Order a pizza via OOCSI
         OOCSIClient sender = new OOCSIClient("group4");
         new OOCSIMessage(sender, "choosePizza").data("user", twitterID).send();
 
-        // TODO: confirm order using confirmOrder method in Tweeter class
+        super.setup();
+        super.confirmOrder("pizza", twitterID);
     }
 
 }
+
+

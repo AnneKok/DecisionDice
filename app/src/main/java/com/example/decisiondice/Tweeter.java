@@ -1,5 +1,9 @@
 package com.example.decisiondice;
 
+import android.os.AsyncTask;
+import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -35,15 +39,12 @@ import twitter4j.conf.ConfigurationBuilder;
  * @author  Manon Blankendaal
  * @author  Anne Kok
  */
-public class Tweeter {
+public class Tweeter extends AppCompatActivity {
 
     TwitterFactory factory;
     Twitter twitter;
     TwitterStreamFactory streamFactory;
     TwitterStream twitterStream;
-
-    StatusHandler statusHandler = new StatusHandler();
-    OOCSIHandler oocsiHandler = new OOCSIHandler();
 
     Query query;
     Status status;
@@ -52,12 +53,15 @@ public class Tweeter {
     int maxTweetLength = 140;
     SimpleDateFormat dateFormat = new SimpleDateFormat("MMMM dd, 'at' HH:mm");
 
+    StatusHandler statusHandler = new StatusHandler(this);
+    OOCSIHandler oocsiHandler = new OOCSIHandler(maxTweetLength, this);
+
     /**
      * Sets up Twitter instance, stream listener, and OOCSI receiver.
      * The listener can monitor streaming Twitter data. The OOCSI receiver
      * monitors incoming OOCSI messages on the tweetBot channel.
      */
-    public Tweeter() {
+    public void setup() {
 
         // Setup Twitter instance
         ConfigurationBuilder cb = new ConfigurationBuilder();
@@ -76,20 +80,9 @@ public class Tweeter {
         // Setup Twitter Streaming API client
         setupStream();
 
-        // Setup OOCSI receiver
-        OOCSI oocsi = new OOCSI(this, "TweetReceiver", "oocsi.id.tue.nl");
-        oocsi.subscribe("tweetBot");
+        //Setup OOCSI receiver
 
-    }
 
-    /**
-     * Handles OOCSI events.
-     * Calls OOCSIHandler's method handleOOCSI.
-     *
-     * @param  event The incoming OOCSI event to be handled.
-     */
-    public void tweetBot(OOCSIEvent event) {
-        oocsiHandler.handleOOCSI(event);
     }
 
     /**
@@ -126,22 +119,13 @@ public class Tweeter {
      * The same status can only be posted once every x hours. The
      * exact value of x is unknown (not released by Twitter).
      *
+     * Uses ASyncTask to complete function.
+     *
      * @param  newStatus The status to be posted, a string.
      * @throws  Exception if the status is not updated properly.
      */
     public void postStatus(String newStatus) {
-
-        if (newStatus.length() > maxTweetLength) {
-            System.out.println("Error: tweet was too long to send.");
-            // For Challenge 2: Also reply over OOCSI that this error occurred.
-        } else {
-            try {
-                status = twitter.updateStatus(newStatus);
-                System.out.println("[Tweeter] Status updated!");
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
+        new TweetPoster().execute(newStatus);
     }
 
     /**
@@ -158,4 +142,35 @@ public class Tweeter {
                         " Your " + product + " has been ordered!";
         postStatus(orderReply);
     }
+
+
+    private class TweetPoster extends AsyncTask<String, Void, String> {
+
+        private Exception exception;
+
+        protected String doInBackground(String... params) {
+
+            String newStatus = params[0];
+
+            if (newStatus.length() > maxTweetLength) {
+                System.out.println("Error: tweet was too long to send.");
+                // For Challenge 2: Also reply over OOCSI that this error occurred.
+            } else {
+                try {
+                    status = twitter.updateStatus(newStatus);
+                    System.out.println("[Tweeter] Status updated!");
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    System.out.println("An exception occurred while posting the tweet.");
+                }
+            }
+            return("Success");
+        }
+
+        protected void onPostExecute(String result) {
+            super.onPostExecute(result);
+        }
+    }
+
 }
+

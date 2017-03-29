@@ -14,7 +14,7 @@ import nl.tue.id.oocsi.client.protocol.*;
 import nl.tue.id.oocsi.client.services.*;
 import nl.tue.id.oocsi.client.socket.*;
 
-public class CoffeeConfirmActivity extends AppCompatActivity {
+public class CoffeeConfirmActivity extends Tweeter {
 
     OOCSIClient sender;
     String twitterID;
@@ -34,7 +34,8 @@ public class CoffeeConfirmActivity extends AppCompatActivity {
                 .data("caffee_time_to_wait", 2)
                 .send();
 
-        // TODO: confirm order using confirmOrder method in Tweeter class
+        super.setup();
+        super.confirmOrder("coffee", twitterID);
     }
 
 }

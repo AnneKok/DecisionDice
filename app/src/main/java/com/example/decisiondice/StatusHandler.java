@@ -17,7 +17,13 @@ import twitter4j.util.function.*;
  * @author  Manon Blankendaal
  * @author  Anne Kok
  */
-public class StatusHandler extends Tweeter {
+public class StatusHandler {
+
+    Tweeter tweeter;
+
+    public StatusHandler(Tweeter tweeter) {
+        this.tweeter = tweeter;
+    }
 
     /**
      * Handles an incoming Twitter status. Checks for cancellation of an order.
@@ -34,7 +40,7 @@ public class StatusHandler extends Tweeter {
             String cancelReply = "@" + status.getUser().getScreenName() +
                     " Your order has been cancelled.";
             // TODO: Cancel order
-            postStatus(cancelReply);
+            tweeter.postStatus(cancelReply);
         }
     }
 
