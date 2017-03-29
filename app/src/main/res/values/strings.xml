@@ -5,6 +5,7 @@
     <string name="confirm">Yes! Make it happen!</string>
     <string name="deny">Oh no! Try again...</string>
     <string name="confirmed_pizza">Your pizza has been ordered!</string>
+    <string name="confirmed_coffee">Your coffee has been ordered!</string>
     <string name="update">We will notify you on Twitter with more information.</string>
 
     <string name="pick_category">Pick a category</string>
@@ -47,5 +48,6 @@
     <string name="welcome">Welcome!</string>
 
     <string name="action_settings">Settings</string>
+    <string name="title_activity_coffee_confirm">CoffeeConfirmActivity</string>
 
 </resources>

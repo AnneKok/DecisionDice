@@ -17,8 +17,9 @@ public class Options extends AppCompatActivity {
     }
 
     /** Called when the user taps the Finished button */
-    public void toRollDice(View view) {
+    public void toRollDice(View view, String category) {
         Intent intent = new Intent(this, RollDice.class);
+        intent.putExtra("category", category);
         startActivity(intent);
     }
 }

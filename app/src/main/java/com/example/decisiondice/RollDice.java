@@ -15,13 +15,25 @@ public class RollDice extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_roll_dice);
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                Intent i = new Intent(RollDice.this, PizzaActivity.class);
-                startActivity(i);
-                finish();
-            }
-        }, TIME_OUT);
+        String category = getIntent().getStringExtra("category");
+        if (category.equals("dinner")) {
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    Intent i = new Intent(RollDice.this, PizzaActivity.class);
+                    startActivity(i);
+                    finish();
+                }
+            }, TIME_OUT);
+        } else if (category.equals("drinks")) {
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    Intent i = new Intent(RollDice.this, CoffeeActivity.class);
+                    startActivity(i);
+                    finish();
+                }
+            }, TIME_OUT);
+        }
     }
 }

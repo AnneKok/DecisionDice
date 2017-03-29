@@ -52,10 +52,10 @@ public class MainActivity extends AppCompatActivity {
             public void success(Result<TwitterSession> result) {
                 TwitterSession session = result.data;
 
-                String msg = "@" + session.getUserName() + " logged in! (#" + session.getUserId() + ")";
+                String msg = "@" + session.getUserName() + " logged in!";
                 twitterID = session.getUserName();
                 TwitterIDHolder.getInstance().setID(twitterID);
-                Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_SHORT).show();
 
                 // Enable Pick a category button
                 categoryButton.setEnabled(true);

@@ -12,8 +12,7 @@ public class DrinksOptions extends Options {
         setContentView(R.layout.activity_drinks_options);
     }
 
-    @Override
     public void toRollDice(View view) {
-        super.toRollDice(view);
+        super.toRollDice(view, "drinks");
     }
 }

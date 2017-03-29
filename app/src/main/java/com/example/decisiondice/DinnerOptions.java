@@ -13,8 +13,7 @@ public class DinnerOptions extends Options {
         setContentView(R.layout.activity_dinner_options);
     }
 
-    @Override
     public void toRollDice(View view) {
-        super.toRollDice(view);
+        super.toRollDice(view, "dinner");
     }
 }

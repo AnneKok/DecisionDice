@@ -5,23 +5,22 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 
-public class PizzaActivity extends AppCompatActivity {
+public class CoffeeActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_pizza);
+        setContentView(R.layout.activity_coffee);
     }
 
     public void rollAgain(View view) {
         Intent intent = new Intent(this, RollDice.class);
-        intent.putExtra("category", "dinner");
+        intent.putExtra("category", "drinks");
         startActivity(intent);
     }
 
-    public void orderPizza(View view) {
-        Intent intent = new Intent(this, PizzaConfirmActivity.class);
+    public void orderCoffee(View view) {
+        Intent intent = new Intent(this, CoffeeConfirmActivity.class);
         startActivity(intent);
     }
-
 }

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.decisiondice.PizzaConfirmActivity">
+    tools:context="com.example.decisiondice.CoffeeConfirmActivity">
 
     <TextView
         android:id="@+id/textView10"
@@ -14,7 +14,7 @@
         android:layout_marginRight="16dp"
         android:layout_marginTop="100dp"
         android:gravity="center_vertical|center_horizontal"
-        android:text="@string/confirmed_pizza"
+        android:text="@string/confirmed_coffee"
         android:textAppearance="@style/TextAppearance.AppCompat.Headline"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -38,4 +38,5 @@
         app:layout_constraintTop_toBottomOf="@+id/textView10"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp" />
+
 </android.support.constraint.ConstraintLayout>
