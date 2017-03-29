@@ -54,6 +54,8 @@ public class Tweeter extends AppCompatActivity {
     SimpleDateFormat dateFormat = new SimpleDateFormat("MMMM dd, 'at' HH:mm");
 
     StatusHandler statusHandler = new StatusHandler(this);
+
+    // TODO: decouple oocsiHandler from Tweeter class (where best to use this?)
     OOCSIHandler oocsiHandler = new OOCSIHandler(maxTweetLength, this);
 
     /**

@@ -1,5 +1,7 @@
 package com.example.decisiondice;
 
+import android.os.AsyncTask;
+
 import nl.tue.id.oocsi.*;
 import nl.tue.id.oocsi.client.*;
 import nl.tue.id.oocsi.client.behavior.*;
@@ -19,18 +21,18 @@ import nl.tue.id.oocsi.client.socket.*;
  * @author  Manon Blankendaal
  * @author  Anne Kok
  */
+
 public class OOCSIHandler {
 
     String OOCSItweet;
+    String channelName = "TweetReceiver";
     int maxTweetLength;
     Tweeter tweeter;
 
     public OOCSIHandler(int maxTweetLength, Tweeter tweeter) {
         this.maxTweetLength = maxTweetLength;
         this.tweeter = tweeter;
-        // TODO: asynctask to fix NetworkOnMainThreadException for OOCSI receiver
-        // OOCSI oocsi = new OOCSI(this, "TweetReceiver", "oocsi.id.tue.nl");
-        // oocsi.subscribe("tweetBot");
+        new OOCSISetup().execute(channelName);
     }
 
     /**
@@ -49,5 +51,22 @@ public class OOCSIHandler {
     }
 
     // TODO: Add more OOCSI functionality?
+
+    private class OOCSISetup extends AsyncTask<String, Void, String> {
+
+        private Exception exception;
+
+        protected String doInBackground(String... params) {
+            String channel = params[0];
+            OOCSI oocsi = new OOCSI(this, channel, "oocsi.id.tue.nl");
+            oocsi.subscribe("tweetBot");
+            return("Success");
+        }
+
+        protected void onPostExecute(String result) {
+            super.onPostExecute(result);
+        }
+    }
+
 
 }
