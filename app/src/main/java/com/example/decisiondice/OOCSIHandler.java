@@ -14,7 +14,7 @@ import nl.tue.id.oocsi.client.socket.*;
  * It handles incoming OOCSI events. In the future, it will
  * be expanded to allow more OOCSI communication.
  *
- * @author  Marcin van de Ven (0895046)
+ * @author  Marcin van de Ven
  * @author  Dianne Vasseur
  * @author  Manon Blankendaal
  * @author  Anne Kok
