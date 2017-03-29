@@ -1,17 +1,8 @@
 package com.example.decisiondice;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
-import java.text.SimpleDateFormat;
-
-import twitter4j.*;
-import twitter4j.api.*;
-import twitter4j.auth.*;
-import twitter4j.conf.*;
-import twitter4j.json.*;
-import twitter4j.management.*;
-import twitter4j.util.*;
-import twitter4j.util.function.*;
 
 import nl.tue.id.oocsi.*;
 import nl.tue.id.oocsi.client.*;
@@ -21,6 +12,17 @@ import nl.tue.id.oocsi.client.data.*;
 import nl.tue.id.oocsi.client.protocol.*;
 import nl.tue.id.oocsi.client.services.*;
 import nl.tue.id.oocsi.client.socket.*;
+import twitter4j.Query;
+import twitter4j.StallWarning;
+import twitter4j.Status;
+import twitter4j.StatusDeletionNotice;
+import twitter4j.StatusListener;
+import twitter4j.Twitter;
+import twitter4j.TwitterFactory;
+import twitter4j.TwitterStream;
+import twitter4j.TwitterStreamFactory;
+import twitter4j.conf.Configuration;
+import twitter4j.conf.ConfigurationBuilder;
 
 /**
  * This class is the main class for the Tweetbot module. It sets up
