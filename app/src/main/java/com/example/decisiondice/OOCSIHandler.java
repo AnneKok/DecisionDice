@@ -50,6 +50,10 @@ public class OOCSIHandler {
         tweeter.postStatus(OOCSItweet);
     }
 
+    public void pizzaResponse(OOCSIEvent pizzaRes) {
+        // handle pizza response
+    }
+
     // TODO: Add more OOCSI functionality?
 
     private class OOCSISetup extends AsyncTask<String, Void, String> {
@@ -59,7 +63,16 @@ public class OOCSIHandler {
         protected String doInBackground(String... params) {
             String channel = params[0];
             OOCSI oocsi = new OOCSI(this, channel, "oocsi.id.tue.nl");
+
+            // Subscribe to TweetBot channel
             oocsi.subscribe("tweetBot");
+
+            // Subscribe to Pizza channel and setup undefined variables address and Twitter ID
+            oocsi.subscribe("choosePizza", "pizzaResponse");
+            oocsi.channel("choosePizza").data("settings", "").data("address", "Dummy Lane 404").send();
+            oocsi.channel("choosePizza").data("settings", "").data("twitterAccount" ,
+                    TwitterIDHolder.getInstance().getID()).send();
+
             return("Success");
         }
 

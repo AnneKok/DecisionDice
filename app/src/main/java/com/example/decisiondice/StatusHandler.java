@@ -36,6 +36,7 @@ public class StatusHandler {
         String tweetText = status.getText().toLowerCase();
 
         // Check for cancellation
+        // TODO: Add real working cancel functionality (track orders)
         if(tweetText.contains("cancel")) {
             String cancelReply = "@" + status.getUser().getScreenName() +
                     " Your order has been cancelled.";

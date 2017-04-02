@@ -81,10 +81,6 @@ public class Tweeter extends AppCompatActivity {
 
         // Setup Twitter Streaming API client
         setupStream();
-
-        //Setup OOCSI receiver
-
-
     }
 
     /**

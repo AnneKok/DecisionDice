@@ -50,11 +50,7 @@
 
         <activity android:name=".PizzaActivity" />
         <activity android:name=".PizzaConfirmActivity" />
-        <activity
-            android:name=".CoffeeConfirmActivity"
-            android:label="@string/title_activity_coffee_confirm"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".activity_coffee_confirm" />
+        <activity android:name=".CoffeeConfirmActivity" />
         <activity android:name=".CoffeeActivity"></activity>
     </application>
 
