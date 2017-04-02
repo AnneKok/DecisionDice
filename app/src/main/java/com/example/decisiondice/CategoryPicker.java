@@ -7,7 +7,7 @@ import android.view.View;
 
 /**
  * Class which allows users to pick a category in which they want the
- * Decision Dice to make a decision (e.g. dinner, drinks, music).
+ * Decision Dice to make a decision (dinner, drinks, music).
  *
  * @author Anne Kok
  */

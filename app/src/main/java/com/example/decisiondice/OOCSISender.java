@@ -17,10 +17,28 @@ import nl.tue.id.oocsi.client.socket.*;
 public class OOCSISender {
 
     private OOCSIClient sender = new OOCSIClient("group4");
+
+    /**
+     * Getter for OOCSI sender.
+     *
+     * @return OOCSI sender for the session.
+     */
     public OOCSIClient getOOCSIsender() {return sender;}
+
+    /**
+     * Setter for OOCSI sender.
+     *
+     * @param sender the {@code OOCSIClient} to be set as sender for the session.
+     */
     public void setOOCSIsender(OOCSIClient sender) {this.sender = sender;}
 
     private static final OOCSISender OOCSIholder = new OOCSISender();
+
+    /**
+     * Getter for the instance of this singleton class.
+     *
+     * @return singleton OOCSISender
+     */
     public static OOCSISender getInstance() {return OOCSIholder;}
 
 }
