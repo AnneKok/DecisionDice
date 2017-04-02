@@ -12,6 +12,11 @@ import nl.tue.id.oocsi.client.protocol.*;
 import nl.tue.id.oocsi.client.services.*;
 import nl.tue.id.oocsi.client.socket.*;
 
+/**
+ * Subclass to order pizza via OOCSI.
+ *
+ * @author Anne Kok
+ */
 public class PizzaConfirmActivity extends Tweeter {
 
     OOCSIClient sender;
@@ -26,11 +31,22 @@ public class PizzaConfirmActivity extends Tweeter {
 
         // Order pizza via OOCSI
         sender = OOCSISender.getInstance().getOOCSIsender();
-        new OOCSIMessage(sender, "choosePizza").data("user", twitterID).send();
+        sender.subscribe("choosePizza", pizzaResHandler);
+        new OOCSIMessage(sender, "choosePizza").data("settings", "").data("address",
+                "Dummy Lane 404").send();
+        new OOCSIMessage(sender, "choosePizza").data("settings", "").data("twitterAccount" ,
+                TwitterIDHolder.getInstance().getID()).send();
 
         super.setup();
         super.confirmOrder("pizza", twitterID);
     }
+
+    Handler pizzaResHandler = new EventHandler() {
+        @Override
+        public void receive(OOCSIEvent oocsiEvent) {
+            // TODO: Handle pizza response if necessary
+        }
+    };
 
 }
 

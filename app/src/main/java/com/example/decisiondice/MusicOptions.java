@@ -5,6 +5,11 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
+/**
+ * Subclass for music category.
+ *
+ * @author Anne Kok
+ */
 public class MusicOptions extends Options {
 
     @Override
@@ -13,6 +18,12 @@ public class MusicOptions extends Options {
         setContentView(R.layout.activity_music_options);
     }
 
+    /**
+     * Called when the user presses the Finished button. Currently shows a toast
+     * alerting the user that the music functionality has not been implemented.
+     *
+     * @param view the button that was pressed
+     */
     public void toRollDice(View view) {
         // TODO: create music choices and add onCheckboxClicked functionality
         // super.toRollDice(view, "music");

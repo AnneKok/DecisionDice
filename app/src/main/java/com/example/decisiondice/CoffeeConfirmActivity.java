@@ -14,6 +14,11 @@ import nl.tue.id.oocsi.client.protocol.*;
 import nl.tue.id.oocsi.client.services.*;
 import nl.tue.id.oocsi.client.socket.*;
 
+/**
+ * Subclass to order coffee via OOCSI.
+ *
+ * @author Anne Kok
+ */
 public class CoffeeConfirmActivity extends Tweeter {
 
     OOCSIClient sender;
@@ -28,6 +33,7 @@ public class CoffeeConfirmActivity extends Tweeter {
 
         // Order coffee via OOCSI
         sender = OOCSISender.getInstance().getOOCSIsender();
+        sender.subscribe("coffee_channel", coffeeResHandler);
         new OOCSIMessage(sender, "coffee_channel")
                 .data("caffee_who", new Random().nextInt(99999)+1)
                 .data("caffee_amount", 1)
@@ -37,5 +43,12 @@ public class CoffeeConfirmActivity extends Tweeter {
         super.setup();
         super.confirmOrder("coffee", twitterID);
     }
+
+    Handler coffeeResHandler = new EventHandler() {
+        @Override
+        public void receive(OOCSIEvent oocsiEvent) {
+            // TODO: Handle coffee response if necessary
+        }
+    };
 
 }

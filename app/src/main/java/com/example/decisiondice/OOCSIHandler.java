@@ -12,16 +12,14 @@ import nl.tue.id.oocsi.client.services.*;
 import nl.tue.id.oocsi.client.socket.*;
 
 /**
- * This class contains the OOCSI handler method.
- * It handles incoming OOCSI events. In the future, it will
- * be expanded to allow more OOCSI communication.
+ * This class contains the OOCSI listener setup and the OOCSI handler method.
+ * It handles incoming OOCSI events.
  *
  * @author  Marcin van de Ven
  * @author  Dianne Vasseur
  * @author  Manon Blankendaal
  * @author  Anne Kok
  */
-
 public class OOCSIHandler {
 
     String OOCSItweet;
@@ -35,44 +33,41 @@ public class OOCSIHandler {
         new OOCSISetup().execute(channelName);
     }
 
-    /**
-     * Posts tweet sent through OOCSI.
-     *
-     * @param  event The OOCSI event to be handled. Should be
-     *  at most {@code maxTweetLength} characters.
-     */
-    public void tweetBot(OOCSIEvent event) {
-        OOCSItweet = event.getString("tweet", "Default tweet. Something went wrong.");
-        if (OOCSItweet.length() > maxTweetLength) {
-            System.out.println("Error: The status is too long to be posted.");
+    Handler tweetBotHandler = new EventHandler() {
+        /**
+         * Posts tweet sent through OOCSI.
+         *
+         * @param oocsiEvent The OOCSI event to be handled. Should be at most {@code maxTweetLength}
+         * characters.
+         */
+        @Override
+        public void receive(OOCSIEvent oocsiEvent) {
+            OOCSItweet = oocsiEvent.getString("tweet", "Default tweet. Something went wrong.");
+            if (OOCSItweet.length() > maxTweetLength) {
+                System.out.println("Error: The status is too long to be posted.");
+            }
+            System.out.println("[OOCSIHandler] Received a Tweet to be sent!");
+            tweeter.postStatus(OOCSItweet);
         }
-        System.out.println("[OOCSIHandler] Received a Tweet to be sent!");
-        tweeter.postStatus(OOCSItweet);
-    }
+    };
 
-    public void pizzaResponse(OOCSIEvent pizzaRes) {
-        // handle pizza response
-    }
-
-    // TODO: Add more OOCSI functionality?
-
+    /**
+     * Class to asynchronously set up our OOCSI listeners.
+     */
     private class OOCSISetup extends AsyncTask<String, Void, String> {
 
         private Exception exception;
 
+        /**
+         * Regular AsyncTask doInBackground method.
+         *
+         * @param params channel name
+         * @return result
+         */
         protected String doInBackground(String... params) {
             String channel = params[0];
-            OOCSI oocsi = new OOCSI(this, channel, "oocsi.id.tue.nl");
-
-            // Subscribe to TweetBot channel
-            oocsi.subscribe("tweetBot");
-
-            // Subscribe to Pizza channel and setup undefined variables address and Twitter ID
-            oocsi.subscribe("choosePizza", "pizzaResponse");
-            oocsi.channel("choosePizza").data("settings", "").data("address", "Dummy Lane 404").send();
-            oocsi.channel("choosePizza").data("settings", "").data("twitterAccount" ,
-                    TwitterIDHolder.getInstance().getID()).send();
-
+            OOCSI tweetBotReceiver = new OOCSI(this, channel, "oocsi.id.tue.nl");
+            tweetBotReceiver.subscribe("tweetBot", "tweetBotHandler");
             return("Success");
         }
 

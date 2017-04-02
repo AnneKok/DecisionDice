@@ -1,9 +1,10 @@
 package com.example.decisiondice;
 
 /**
- * Created by Anne on 22/03/2017.
+ * Singleton class for holding the user's Twitter ID.
+ *
+ * @author Anne Kok
  */
-
 public class TwitterIDHolder {
     private String ID;
     public String getID() {return ID;}

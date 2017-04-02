@@ -10,7 +10,8 @@ import twitter4j.util.*;
 import twitter4j.util.function.*;
 
 /**
- * This class contains a handler for Twitter statuses.
+ * This class serves to handle received Twitter statuses (statuses containing our
+ * group's Twitter handle).
  *
  * @author  Marcin van de Ven
  * @author  Dianne Vasseur
@@ -32,7 +33,6 @@ public class StatusHandler {
      */
     public void handleStatus(Status status) {
 
-        System.out.println("[StatusHandler] " + status.getUser().getName() + " : " + status.getText());
         String tweetText = status.getText().toLowerCase();
 
         // Check for cancellation

@@ -19,6 +19,11 @@ import nl.tue.id.oocsi.client.protocol.*;
 import nl.tue.id.oocsi.client.services.*;
 import nl.tue.id.oocsi.client.socket.*;
 
+/**
+ * Class for rolling the dice.
+ *
+ * @author Anne Kok
+ */
 public class RollDice extends AppCompatActivity {
 
     int noOfSides = 6;
@@ -63,7 +68,7 @@ public class RollDice extends AppCompatActivity {
         }
     }
 
-    /*
+/*
     Gesture.ROLL_LEFT.addListener(new GestureHandler() {
         @Override
         public void gesturePerformed(GestureEvent gestureEvent) {
@@ -91,11 +96,19 @@ public class RollDice extends AppCompatActivity {
             handleGesture(gestureEvent);
         }
     });
+*/
 
+    /**
+     * Handles a gesture by updating the decision to a random integer.
+     *
+     * @param gestureEvent the gesture to be handled
+     */
+/*
     private void handleGesture(GestureEvent gestureEvent) {
         gestureEvent.setFeedback(false)
         gestureEvent.setCancelled(true);
         decision = gen.nextInt(noOfSides);
     }
-    */
+*/
+
 }

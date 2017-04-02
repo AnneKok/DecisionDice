@@ -142,14 +142,21 @@ public class Tweeter extends AppCompatActivity {
     }
 
 
+    /**
+     * Asynchronously posts a tweet to Twitter.
+     */
     private class TweetPoster extends AsyncTask<String, Void, String> {
 
         private Exception exception;
 
+        /**
+         * Usual AsyncTask doInBackground method.
+         *
+         * @param params text of tweet to be posted
+         * @return result
+         */
         protected String doInBackground(String... params) {
-
             String newStatus = params[0];
-
             if (newStatus.length() > maxTweetLength) {
                 System.out.println("Error: tweet was too long to send.");
                 // For Challenge 2: Also reply over OOCSI that this error occurred.
@@ -164,7 +171,6 @@ public class Tweeter extends AppCompatActivity {
             }
             return("Success");
         }
-
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
         }

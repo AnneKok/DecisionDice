@@ -26,9 +26,14 @@ import com.twitter.sdk.android.core.TwitterSession;
 import com.twitter.sdk.android.core.identity.TwitterLoginButton;
 import com.twitter.sdk.android.core.models.User;
 
+/**
+ * Main class using the layout shown to the user when starting the application.
+ *
+ * @author Anne Kok
+ */
 public class MainActivity extends AppCompatActivity {
 
-    // Note: Your consumer key and secret should be obfuscated in your source code before shipping.
+    // TODO: obfuscate keys
     private static final String TWITTER_KEY = "CdgOhLWmfD6gO4MqwAsQYpvHu";
     private static final String TWITTER_SECRET = "LueXAWdgCWluDHq2I5hGlMOw4RwPpx0fsD8RehXuqtMxmyx3Ii";
     private TwitterLoginButton loginButton;
@@ -41,25 +46,15 @@ public class MainActivity extends AppCompatActivity {
         Fabric.with(this, new Twitter(authConfig));
         setContentView(R.layout.activity_main);
 
-        // Disable Pick a category button by default
-        final Button categoryButton = (Button) findViewById(R.id.pickCategoryButton);
-        categoryButton.setEnabled(false);
-        categoryButton.setVisibility(View.INVISIBLE);
+        setPickCategory(false);
 
         loginButton = (TwitterLoginButton) findViewById(R.id.twitter_login_button);
         loginButton.setCallback(new Callback<TwitterSession>() {
             @Override
             public void success(Result<TwitterSession> result) {
                 TwitterSession session = result.data;
-
-                String msg = "@" + session.getUserName() + " logged in!";
-                twitterID = session.getUserName();
-                TwitterIDHolder.getInstance().setID(twitterID);
-                Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_SHORT).show();
-
-                // Enable Pick a category button
-                categoryButton.setEnabled(true);
-                categoryButton.setVisibility(View.VISIBLE);
+                confirmSignIn(session);
+                setPickCategory(true);
             }
             @Override
             public void failure(TwitterException exception) {
@@ -69,15 +64,53 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * Confirms sign in to user by showing a message.
+     *
+     * @param session session of the current user
+     */
+    protected void confirmSignIn(TwitterSession session) {
+        String msg = "@" + session.getUserName() + " logged in!";
+        twitterID = session.getUserName();
+        TwitterIDHolder.getInstance().setID(twitterID);
+        Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_SHORT).show();
+    }
+
+    /**
+     * Enables or disables (and makes invisible) the Pick a category button.
+     *
+     * @param enabled
+     */
+    protected void setPickCategory(boolean enabled) {
+        final Button categoryButton = (Button) findViewById(R.id.pickCategoryButton);
+        if (enabled) {
+            categoryButton.setEnabled(true);
+            categoryButton.setVisibility(View.VISIBLE);
+        } else {
+            categoryButton.setEnabled(false);
+            categoryButton.setVisibility(View.INVISIBLE);
+        }
+    }
+
+    /**
+     * Method required for Twitter login, to make sure the login button hears the result
+     * from any activity that it triggered.
+     *
+     * @param requestCode the request
+     * @param resultCode the result
+     * @param data the Intent
+     */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        // Make sure that the loginButton hears the result from any
-        // Activity that it triggered.
         loginButton.onActivityResult(requestCode, resultCode, data);
     }
 
-    /** Called when the user taps the Pick a category button */
+    /**
+     * Called when the user taps the Pick a category button.
+     *
+     * @param view the button that was pressed
+     */
     public void toPickCategory(View view) {
         Intent intent = new Intent(this, CategoryPicker.class);
         startActivity(intent);
