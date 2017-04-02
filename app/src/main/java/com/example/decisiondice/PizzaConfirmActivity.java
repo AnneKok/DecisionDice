@@ -24,8 +24,8 @@ public class PizzaConfirmActivity extends Tweeter {
 
         twitterID = TwitterIDHolder.getInstance().getID();
 
-        // Order a pizza via OOCSI
-        OOCSIClient sender = new OOCSIClient("group4");
+        // Order pizza via OOCSI
+        sender = OOCSISender.getInstance().getOOCSIsender();
         new OOCSIMessage(sender, "choosePizza").data("user", twitterID).send();
 
         super.setup();

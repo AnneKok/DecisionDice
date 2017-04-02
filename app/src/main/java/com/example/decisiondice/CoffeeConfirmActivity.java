@@ -26,8 +26,8 @@ public class CoffeeConfirmActivity extends Tweeter {
 
         twitterID = TwitterIDHolder.getInstance().getID();
 
-        // Order coffee
-        OOCSIClient sender = new OOCSIClient("group4");
+        // Order coffee via OOCSI
+        sender = OOCSISender.getInstance().getOOCSIsender();
         new OOCSIMessage(sender, "coffee_channel")
                 .data("caffee_who", new Random().nextInt(99999)+1)
                 .data("caffee_amount", 1)
