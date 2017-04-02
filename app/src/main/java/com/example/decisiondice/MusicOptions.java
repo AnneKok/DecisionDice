@@ -14,7 +14,7 @@ public class MusicOptions extends Options {
     }
 
     public void toRollDice(View view) {
-        // TODO: create music choice
+        // TODO: create music choices and add onCheckboxClicked functionality
         // super.toRollDice(view, "music");
         Toast.makeText(getApplicationContext(),
                 "We're sorry, the music functionality has not been implemented yet.",
