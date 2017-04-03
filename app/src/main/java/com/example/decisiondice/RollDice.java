@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.Toast;
 
 // TODO: fix gestures import, uncomment related code in this class
 // import gestures.*;
@@ -19,6 +20,8 @@ import nl.tue.id.oocsi.client.protocol.*;
 import nl.tue.id.oocsi.client.services.*;
 import nl.tue.id.oocsi.client.socket.*;
 
+import static android.widget.Toast.LENGTH_LONG;
+
 /**
  * Class for rolling the dice.
  *
@@ -26,9 +29,9 @@ import nl.tue.id.oocsi.client.socket.*;
  */
 public class RollDice extends AppCompatActivity {
 
-    int noOfSides = 6;
+    int noOfSides = 0;
     Random gen = new Random();
-    int decision = 1 + gen.nextInt(noOfSides);
+    int decision = 0;
 
     // After this time-out, the decision will be shown to the user
     // TODO: make sure Gestures detection works during the timeout
@@ -47,7 +50,13 @@ public class RollDice extends AppCompatActivity {
         */
 
         String category = getIntent().getStringExtra("category");
-        if (category.equals("dinner")) {
+        noOfSides = getIntent().getIntExtra("sides", 0);
+        if (noOfSides == 0) {
+            Toast.makeText(getApplicationContext(),
+                    "Something went wrong with selecting options." +
+                            " Please try again.", LENGTH_LONG).show();
+        }
+        else if (category.equals("dinner")) {
             new Handler().postDelayed(new Runnable() {
                 @Override
                 public void run() {
@@ -107,8 +116,11 @@ public class RollDice extends AppCompatActivity {
     private void handleGesture(GestureEvent gestureEvent) {
         gestureEvent.setFeedback(false)
         gestureEvent.setCancelled(true);
-        decision = gen.nextInt(noOfSides);
+        decision = 1 + gen.nextInt(noOfSides);
     }
 */
+
+    // TODO: pass selected options to the dice in an array
+    // so that the decision is one of the options in the array using int decision-1 as array index
 
 }

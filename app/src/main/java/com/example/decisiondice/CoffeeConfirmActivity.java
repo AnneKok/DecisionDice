@@ -44,10 +44,26 @@ public class CoffeeConfirmActivity extends Tweeter {
         super.confirmOrder("coffee", twitterID);
     }
 
+    /**
+     * Handler method for the OOCSI response of the coffee module.
+     */
     Handler coffeeResHandler = new EventHandler() {
         @Override
         public void receive(OOCSIEvent oocsiEvent) {
-            // TODO: Handle coffee response if necessary
+            int coffeeRes = oocsiEvent.getInt("output_type", 0);
+                if(coffeeRes == 0 || coffeeRes == 2 | coffeeRes == 6) {
+                    CoffeeConfirmActivity.super.postStatus("@" + twitterID + " " +
+                            "Sorry, something went wrong with your order. Please try again!"
+                    );
+                } else if (coffeeRes == 3) {
+                    CoffeeConfirmActivity.super.postStatus("@" + twitterID + " " +
+                            "Your coffee is being prepared!"
+                    );
+                } else if (coffeeRes == 4) {
+                    CoffeeConfirmActivity.super.postStatus("@" + twitterID + " " +
+                            "Your coffee is ready!"
+                    );
+                }
         }
     };
 

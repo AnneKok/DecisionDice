@@ -37,6 +37,7 @@ public class Options extends AppCompatActivity {
         if(optionsChecked()) {
             Intent intent = new Intent(this, RollDice.class);
             intent.putExtra("category", category);
+            intent.putExtra("sides", numberOptionsChecked);
             startActivity(intent);
         } else {
             Toast.makeText(getApplicationContext(),

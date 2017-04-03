@@ -66,8 +66,8 @@ public class OOCSIHandler {
          */
         protected String doInBackground(String... params) {
             String channel = params[0];
-            OOCSI tweetBotReceiver = new OOCSI(this, channel, "oocsi.id.tue.nl");
-            tweetBotReceiver.subscribe("tweetBot", "tweetBotHandler");
+            OOCSIClient tweetBot = OOCSISender.getInstance().getOOCSIsender();
+            tweetBot.subscribe("tweetBot", tweetBotHandler);
             return("Success");
         }
 

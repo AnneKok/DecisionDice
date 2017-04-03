@@ -44,7 +44,8 @@ public class PizzaConfirmActivity extends Tweeter {
     Handler pizzaResHandler = new EventHandler() {
         @Override
         public void receive(OOCSIEvent oocsiEvent) {
-            // TODO: Handle pizza response if necessary
+            String pizzaRes = oocsiEvent.getString("response");
+            PizzaConfirmActivity.super.postStatus("@" + twitterID + " " + pizzaRes);
         }
     };
 
