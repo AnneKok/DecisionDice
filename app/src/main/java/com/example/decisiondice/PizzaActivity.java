@@ -12,10 +12,13 @@ import android.view.View;
  */
 public class PizzaActivity extends AppCompatActivity {
 
+    int noOfSides = 0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pizza);
+        noOfSides = getIntent().getIntExtra("sides", 0);
     }
 
     /**
@@ -26,6 +29,7 @@ public class PizzaActivity extends AppCompatActivity {
     public void rollAgain(View view) {
         Intent intent = new Intent(this, RollDice.class);
         intent.putExtra("category", "dinner");
+        intent.putExtra("sides", noOfSides);
         startActivity(intent);
     }
 
