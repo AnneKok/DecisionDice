@@ -31,16 +31,21 @@ public class PizzaConfirmActivity extends Tweeter {
 
         // Order pizza via OOCSI
         sender = OOCSISender.getInstance().getOOCSIsender();
+        sender.connect("oocsi.id.tue.nl", 4444);
         sender.subscribe("choosePizza", pizzaResHandler);
-        new OOCSIMessage(sender, "choosePizza").data("settings", "").data("address",
-                "Dummy Lane 404").send();
-        new OOCSIMessage(sender, "choosePizza").data("settings", "").data("twitterAccount" ,
-                TwitterIDHolder.getInstance().getID()).send();
+        new OOCSIMessage(sender, "choosePizza").data("settings", "")
+                .data("address", "Dummy Lane 404")
+                .data("twitterAccount", TwitterIDHolder.getInstance().getID())
+                .data("feedBackChannel", "choosePizza")
+                .send();
 
         super.setup();
         super.confirmOrder("pizza", twitterID);
     }
 
+    /**
+     * Handler method for the OOCSI response of the pizza module.
+     */
     Handler pizzaResHandler = new EventHandler() {
         @Override
         public void receive(OOCSIEvent oocsiEvent) {
