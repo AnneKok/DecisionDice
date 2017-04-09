@@ -40,7 +40,7 @@ public class CoffeeConfirmActivity extends Tweeter {
                 .data("caffee_amount", 1)
                 .data("caffee_time_to_wait", 2)
                 .send();
-        
+
         super.setup();
         super.confirmOrder("coffee", twitterID);
     }
